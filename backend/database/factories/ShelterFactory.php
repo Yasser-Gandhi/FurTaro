@@ -19,10 +19,10 @@ class ShelterFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->company,
+            'name' => $this->faker->company(),
             'email' => $this->faker->unique()->safeEmail,
-            'location' => $this->faker->address,
-            'contact_number' => $this->faker->phoneNumber,
+            'location' => $this->faker->address(),
+            'contact_number' => $this->faker->phoneNumber(),
             'role' => $this->faker->randomElement(['user', 'admin', 'shelter_manager']),
         ];
     }

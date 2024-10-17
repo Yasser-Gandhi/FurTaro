@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->bigIncrements('favorite_id'); // Clave primaria para 'favorites'
+            $table->bigIncrements('favorite_id'); // Clave primaria autoincremental para 'favorites'
             $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade'); // Referencia a 'user_id' en 'users'
-            $table->unsignedBigInteger('pet_id'); // Clave foránea para 'pet_id'
-            $table->foreign('pet_id')->references('pet_id')->on('pets')->onDelete('cascade'); // Referencia a 'pet_id' en 'pets'
+            $table->foreignId('pet_id')->constrained('pets', 'pet_id')->onDelete('cascade'); // Clave foránea para 'pet_id'
+            $table->boolean('is_favorite')->default(false); // Nuevo campo booleano para controlar la actividad
             $table->timestamps();
         });
     }

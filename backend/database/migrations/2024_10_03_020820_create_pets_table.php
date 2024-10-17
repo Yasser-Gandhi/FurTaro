@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('species');
             $table->integer('age');
-            $table->string('description');
-            $table->unsignedBigInteger('shelter_id'); // Define 'shelter_id' como unsignedBigInteger
-            $table->foreign('shelter_id')->references('shelter_id')->on('shelters')->onDelete('cascade'); // Referencia a 'shelter_id' en 'shelters'
+            $table->text('description');
+            $table->foreignId('shelter_id')->constrained('shelters', 'shelter_id')->onDelete('cascade'); // Clave foránea a 'shelters'
             $table->timestamps();
         });
     }

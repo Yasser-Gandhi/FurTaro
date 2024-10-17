@@ -3,11 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Favorite;
+use App\Models\Pet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Favorite>
- */
 class FavoriteFactory extends Factory
 {
     protected $model = Favorite::class;
@@ -15,8 +13,9 @@ class FavoriteFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => \App\Models\User::factory(), // Crea un usuario asociado
-            'pet_id' => \App\Models\Pet::factory(),   // Crea una mascota asociada
+            'user_id' => 1, // O un usuario generado aleatoriamente
+            'pet_id' => Pet::factory(), // Asegúrate de que esto esté correcto
+            'is_favorite' => $this->faker->boolean(),
         ];
     }
 }

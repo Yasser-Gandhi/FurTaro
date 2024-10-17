@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('adoptions', function (Blueprint $table) {
             $table->bigIncrements('adoption_id'); // Clave primaria para 'adoptions'
-            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade'); // Clave foránea
-            $table->unsignedBigInteger('pet_id'); // Clave foránea para 'pet_id'
-            $table->foreign('pet_id')->references('pet_id')->on('pets')->onDelete('cascade'); // Referencia a 'pet_id' en 'pets'
+            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade'); // Clave foránea a 'users'
+            $table->foreignId('pet_id')->constrained('pets', 'pet_id')->onDelete('cascade'); // Clave foránea a 'pets'
             $table->timestamps();
         });
     }

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('contact_number')->nullable();
-            $table->string('location')->nullable();
+            $table->string('contact_number');
+            $table->string('location');
             $table->enum('role', ['user', 'admin', 'shelter_manager']);
             $table->timestamps();
         });

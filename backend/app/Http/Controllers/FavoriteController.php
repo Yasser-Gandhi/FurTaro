@@ -14,7 +14,14 @@ class FavoriteController extends Controller
 
     public function store(Request $request)
     {
-        return Favorite::create($request->all());
+        // Validación de los datos de entrada
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,user_id',
+            'pet_id' => 'required|exists:pets,pet_id',
+            'is_active' => 'boolean', // Asegura que is_active sea un booleano
+        ]);
+
+        return Favorite::create($validatedData);
     }
 
     public function show(Favorite $favorite)
@@ -24,7 +31,14 @@ class FavoriteController extends Controller
 
     public function update(Request $request, Favorite $favorite)
     {
-        $favorite->update($request->all());
+        // Validación de los datos de entrada
+        $validatedData = $request->validate([
+            'user_id' => 'sometimes|exists:users,user_id',
+            'pet_id' => 'sometimes|exists:pets,pet_id',
+            'is_active' => 'sometimes|boolean', // Asegura que is_active sea un booleano
+        ]);
+
+        $favorite->update($validatedData);
         return $favorite;
     }
 

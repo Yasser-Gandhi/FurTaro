@@ -17,7 +17,7 @@ class User extends Authenticatable // Define la clase User que hereda de Authent
      *
      * @var array<int, string>
      */
-    protected $fillable = ['user_id','name', 'email', 'password', 'role', 'contact_number', 'location']; 
+    protected $fillable = ['name', 'email', 'password', 'role', 'contact_number', 'location']; 
     // Define los atributos que se pueden asignar masivamente al crear o actualizar un usuario
 
     protected $hidden = ['password']; 

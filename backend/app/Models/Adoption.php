@@ -9,13 +9,12 @@ class Adoption extends Model
 {
     use HasFactory;
 
-    protected $table = 'adoptions'; // Asegúrate de que este sea el nombre correcto de tu tabla
-    protected $primaryKey = 'adoption_id'; // Cambia esto si tienes una clave primaria específica
-    public $incrementing = true; // Indica que la clave primaria es autoincrementable
-    protected $keyType = 'int'; // Especifica que la clave primaria es un entero
+    protected $table = 'adoptions';
+    protected $primaryKey = 'adoption_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
-    protected $fillable = ['pet_id', 'user_id', 'status'];
-
+    protected $fillable = ['user_id', 'pet_id', 'adoption_date'];
     public function pet()
     {
         return $this->belongsTo(Pet::class);

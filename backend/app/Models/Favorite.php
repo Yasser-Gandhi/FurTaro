@@ -9,16 +9,13 @@ class Favorite extends Model
 {
     use HasFactory;
 
-    protected $table = 'favorites'; // Asegúrate de que este sea el nombre correcto de tu tabla
-    protected $primaryKey = 'favorite_id'; // Clave primaria específica
-    public $incrementing = true; // Indica que la clave primaria es autoincrementable
-    protected $keyType = 'int'; // Especifica que la clave primaria es un entero
+    protected $table = 'favorites';
+    protected $primaryKey = 'favorite_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
-    protected $fillable = [
-        'user_id',
-        'pet_id',
-        'is_favorite', // Incluye el nuevo campo is_active
-    ];
+    protected $fillable = ['user_id', 'pet_id'];
+
 
     // Relación con el modelo User
     public function user()

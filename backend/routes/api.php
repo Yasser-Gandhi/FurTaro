@@ -2,6 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ShelterController;
+use App\Http\Controllers\PetController;
+use App\Http\Controllers\AdoptionController;
+use App\Http\Controllers\FavoriteController;
 
 // Ruta para obtener el usuario autenticado
 Route::get('/user', function (Request $request) {
@@ -12,20 +17,9 @@ Route::get('/', function () {
     return response()->json(['message' => 'API de Adopciones Mascotas']);
 });
 
-// Rutas para la gestión de mascotas
-Route::apiResource('pets', App\Http\Controllers\PetController::class); // Cambié la sintaxis
 
-// Rutas para la gestión de usuarios
-Route::apiResource('users', App\Http\Controllers\UserController::class);
-
-// Rutas para la gestión de adopciones
-Route::apiResource('adoptions', App\Http\Controllers\AdoptionController::class);
-
-// Rutas para la gestión de refugios
-Route::apiResource('shelters', App\Http\Controllers\ShelterController::class);
-
-// Rutas para la gestión de favoritos
-Route::apiResource('favorites', App\Http\Controllers\FavoriteController::class);
-
-// Rutas públicas (sin autenticación)
-Route::get('/pets/search/{species}', [App\Http\Controllers\PetController::class, 'searchBySpecies']);
+Route::apiResource('users', UserController::class);
+Route::apiResource('shelters', ShelterController::class);
+Route::apiResource('pets', PetController::class);
+Route::apiResource('adoptions', AdoptionController::class);
+Route::apiResource('favorites', FavoriteController::class);

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pets', function (Blueprint $table) {
-            $table->bigIncrements('pet_id'); // Clave primaria para 'pets'
+            $table->id('pet_id');
             $table->string('name');
             $table->string('species');
             $table->integer('age');
-            $table->text('description');
-            $table->foreignId('shelter_id')->constrained('shelters', 'shelter_id')->onDelete('cascade'); // Clave foránea a 'shelters'
+            $table->longText('description');
+            $table->foreignId('shelter_id')->constrained('shelters');
             $table->timestamps();
         });
     }

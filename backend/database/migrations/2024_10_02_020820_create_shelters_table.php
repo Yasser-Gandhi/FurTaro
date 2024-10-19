@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('shelters', function (Blueprint $table) {
-            $table->bigIncrements('shelter_id'); // Cambia 'id' por 'shelter_id' como clave primaria
+            $table->id('shelter_id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('contact_number');
+            $table->string('email');
             $table->string('location');
-            $table->enum('role', ['user', 'admin', 'shelter_manager']);
+            $table->string('contact_number');
             $table->timestamps();
         });
     }

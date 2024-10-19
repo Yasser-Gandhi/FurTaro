@@ -13,8 +13,7 @@ class Pet extends Model
     protected $primaryKey = 'pet_id'; // Especifica la clave primaria
     public $incrementing = true; // Indica que pet_id es autoincrementable
     protected $keyType = 'int'; // Especifica que pet_id es un entero
-    protected $fillable = ['name', 'species', 'age', 'description', 'shelter_id']; // Campos asignables
-
+    protected $fillable = ['name', 'species', 'age', 'description', 'shelter_id'];
     // Relación con el modelo Shelter
     public function shelter()
     {

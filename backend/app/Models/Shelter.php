@@ -9,13 +9,12 @@ class Shelter extends Model
 {
     use HasFactory;
 
-    protected $table = 'shelters'; // Asegúrate de que este sea el nombre correcto de tu tabla
-    protected $primaryKey = 'shelter_id'; // Define la clave primaria
-    public $incrementing = true; // Indica que la clave primaria es autoincrementable
-    protected $keyType = 'int'; // Especifica que la clave primaria es un entero
+    protected $table = 'shelters';
+    protected $primaryKey = 'shelter_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
-    protected $fillable = ['name', 'email', 'location', 'contact_number', 'role']; // Elimina shelter_id
-
+    protected $fillable = ['name', 'email', 'location', 'contact_number'];
     public function pets()
     {
         return $this->hasMany(Pet::class);

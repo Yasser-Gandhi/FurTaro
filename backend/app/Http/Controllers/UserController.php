@@ -14,7 +14,16 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        return User::create($request->all());
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string|min:6',
+            'adoption_date' => 'nullable|date',
+        ]);
+
+        $user = User::create($validatedData);
+        return response()->json($user, 201);
     }
 
     public function show(User $user)
@@ -24,13 +33,21 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
-        return $user;
+        $validatedData = $request->validate([
+            'name' => 'string|max:255',
+            'phone_number' => 'string',
+            'email' => 'string|email|unique:users,email,' . $user->id,
+            'password' => 'string|min:6',
+            'adoption_date' => 'nullable|date',
+        ]);
+
+        $user->update($validatedData);
+        return response()->json($user, 200);
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return response()->noContent();
+        return response()->json(null, 204);
     }
 }

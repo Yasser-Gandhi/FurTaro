@@ -9,9 +9,9 @@ use App\Http\Controllers\AdoptionController;
 use App\Http\Controllers\FavoriteController;
 
 // Ruta para obtener el usuario autenticado
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
 
 Route::get('/', function () {
     return response()->json(['message' => 'API de Adopciones Mascotas']);

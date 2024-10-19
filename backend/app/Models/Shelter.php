@@ -14,7 +14,7 @@ class Shelter extends Model
     public $incrementing = true;
     protected $keyType = 'int';
 
-    protected $fillable = ['name', 'email', 'location', 'contact_number'];
+    protected $fillable = ['name', 'email', 'location', 'phone_number'];
     public function pets()
     {
         return $this->hasMany(Pet::class);

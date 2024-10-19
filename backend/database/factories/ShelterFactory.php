@@ -22,8 +22,7 @@ class ShelterFactory extends Factory
             'name' => $this->faker->company(),
             'email' => $this->faker->unique()->safeEmail,
             'location' => $this->faker->address(),
-            'contact_number' => $this->faker->phoneNumber(),
-            'role' => $this->faker->randomElement(['user', 'admin', 'shelter_manager']),
+            'phone_number' => $this->faker->phoneNumber(),
         ];
     }
 }

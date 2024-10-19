@@ -3,26 +3,20 @@
 namespace Database\Factories;
 
 use App\Models\Adoption;
+use App\Models\User;
+use App\Models\Pet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Adoption>
- */
 class AdoptionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     protected $model = Adoption::class;
 
-    public function definition(): array
+    public function definition()
     {
         return [
-            'pet_id' => \App\Models\Pet::factory(),
-            'user_id' => \App\Models\User::factory(),
-            'status' => 'pending',
+            'user_id' => User::factory(), // Crea un usuario si no existe
+            'pet_id' => Pet::factory(),   // Crea una mascota si no existe
+            'adoption_date' => $this->faker->dateTimeThisDecade(), // Fecha aleatoria en la última década
         ];
     }
 }

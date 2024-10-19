@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pets', function (Blueprint $table) {
-            $table->id('pet_id');
+            $table->id('pet_id'); // Clave primaria de la tabla 'pets'
             $table->string('name');
-            $table->string('species');
+            $table->string('species', 50);
             $table->integer('age');
             $table->longText('description');
-            $table->foreignId('shelter_id')->constrained('shelters');
-            $table->timestamps();
+            $table->foreignId('shelter_id')->constrained('shelters', 'shelter_id'); // Define la clave foránea correctamente
+            $table->timestamp('adoption_date')->nullable();
+            $table->timestamps(); // created_at and updated_at
         });
     }
 

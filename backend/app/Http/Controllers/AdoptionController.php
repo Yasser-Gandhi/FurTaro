@@ -14,7 +14,14 @@ class AdoptionController extends Controller
 
     public function store(Request $request)
     {
-        return Adoption::create($request->all());
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,user_id',
+            'pet_id' => 'required|exists:pets,pet_id',
+            'adoption_date' => 'required|date',
+        ]);
+
+        $adoption = Adoption::create($validatedData);
+        return response()->json($adoption, 201);
     }
 
     public function show(Adoption $adoption)
@@ -24,13 +31,19 @@ class AdoptionController extends Controller
 
     public function update(Request $request, Adoption $adoption)
     {
-        $adoption->update($request->all());
-        return $adoption;
+        $validatedData = $request->validate([
+            'user_id' => 'exists:users,user_id',
+            'pet_id' => 'exists:pets,pet_id',
+            'adoption_date' => 'date',
+        ]);
+
+        $adoption->update($validatedData);
+        return response()->json($adoption, 200);
     }
 
     public function destroy(Adoption $adoption)
     {
         $adoption->delete();
-        return response()->noContent();
+        return response()->json(null, 204);
     }
 }

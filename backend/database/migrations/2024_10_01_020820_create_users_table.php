@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id('user_id'); // Clave primaria de la tabla 'users'
             $table->string('name');
-            $table->string('phone_number');
-            $table->string('email')->unique();
+            $table->string('phone_number'); // Cambia el tipo de dato según tus necesidades
+            $table->string('email', 50)->unique();
             $table->string('password');
-            $table->timestamps();
+            $table->timestamp('adoption_date')->nullable(); // Asegúrate de incluir esta columna
+            $table->timestamps(); // created_at and updated_at
         });
     }
 

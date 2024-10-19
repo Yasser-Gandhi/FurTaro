@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('shelters', function (Blueprint $table) {
-            $table->id('shelter_id');
+            $table->id('shelter_id'); // Clave primaria de la tabla 'shelters'
             $table->string('name');
-            $table->string('email');
+            $table->string('email', 50)->unique();
             $table->string('location');
-            $table->string('contact_number');
-            $table->timestamps();
+            $table->string('phone_number', 50);
+            $table->timestamps(); // created_at and updated_at
         });
     }
 

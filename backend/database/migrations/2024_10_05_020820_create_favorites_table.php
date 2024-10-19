@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->id('favorite_id');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('pet_id')->constrained('pets');
-            $table->timestamps();
+            $table->id('favorite_id'); // Clave primaria de la tabla 'favorites'
+            $table->foreignId('user_id')->constrained('users', 'user_id'); // Ajusta la clave foránea a 'user_id'
+            $table->foreignId('pet_id')->constrained('pets', 'pet_id'); // Ajusta la clave foránea a 'pet_id'
+            $table->timestamps(); // created_at and updated_at
         });
     }
 

@@ -24,15 +24,14 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'contact_number' => $this->faker->phoneNumber(),
-            'password' => static::$password ??= Hash::make('password'),
-            'location' => $this->faker->address(),
-            'role' => $this->faker->randomElement(['user', 'admin', 'shelter_manager']),
+            'name' => $this->faker->name,
+            'phone_number' => $this->faker->phoneNumber,
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => bcrypt('password'), // ejemplo de contraseña
+            'adoption_date' => $this->faker->dateTimeThisDecade(),
         ];
     }
 

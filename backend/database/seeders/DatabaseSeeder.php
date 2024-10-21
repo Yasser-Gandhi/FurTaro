@@ -7,6 +7,7 @@ use App\Models\Shelter;
 use App\Models\User;
 use App\Models\Pet;
 use App\Models\Favorite;
+use App\Models\Adoption;
 
 class DatabaseSeeder extends Seeder
 {

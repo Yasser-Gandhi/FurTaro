@@ -4,8 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Pet;
 use App\Models\Shelter;
-use Database\Factories\ShelterFactory;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PetFactory extends Factory
@@ -15,10 +13,11 @@ class PetFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->randomElement(['Bella', 'Max', 'Charlie', 'Luna', 'Oliver', 'Lucy', 'Daisy', 'Buddy', 'Taro']),
             'species' => $this->faker->randomElement(['dog', 'cat', 'rabbit', 'hamster']),
             'age' => $this->faker->numberBetween(1, 25),
             'description' => $this->faker->sentence(),
+            'shelter_id' => Shelter::factory(),
         ];
     }
 }

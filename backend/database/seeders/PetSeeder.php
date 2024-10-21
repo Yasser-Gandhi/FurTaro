@@ -2,17 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pet;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Pet;
+use App\Models\Shelter;
 
 class PetSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Pet::factory()->count(30)->create();
+        $shelters = Shelter::all();
+
+        foreach ($shelters as $shelter) {
+            Pet::factory()->create([
+                'shelter_id' => $shelter->shelter_id, // Asigna un shelter_id válido
+            ]);
+        }
     }
 }

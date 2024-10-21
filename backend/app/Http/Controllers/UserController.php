@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return User::all();
+        return response()->json(User::all(), 200);
     }
 
     public function store(Request $request)
@@ -18,36 +20,67 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'phone_number' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:6',
             'adoption_date' => 'nullable|date',
+            'password' => 'required|string|min:8',
         ]);
 
+        $validatedData['password'] = Hash::make($validatedData['password']);
         $user = User::create($validatedData);
-        return response()->json($user, 201);
+        Log::info('User created with user_id: ' . $user->user_id);
+
+        return response()->json(['user_id' => $user->user_id] + $user->toArray(), 201);
     }
 
-    public function show(User $user)
+    public function show($user_id)
     {
-        return $user;
-    }
+        $user = User::where('user_id', $user_id)->first();
 
-    public function update(Request $request, User $user)
-    {
-        $validatedData = $request->validate([
-            'name' => 'string|max:255',
-            'phone_number' => 'string',
-            'email' => 'string|email|unique:users,email,' . $user->id,
-            'password' => 'string|min:6',
-            'adoption_date' => 'nullable|date',
-        ]);
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
 
-        $user->update($validatedData);
         return response()->json($user, 200);
     }
 
-    public function destroy(User $user)
+    public function update(Request $request, $user_id)
     {
+        $user = User::where('user_id', $user_id)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        try {
+            $validatedData = $request->validate([
+                'name' => 'sometimes|string|max:255',
+                'phone_number' => 'sometimes|string',
+                'email' => 'sometimes|string|email|unique:users,email,' . $user->user_id . ',user_id', // Cambiado aquí
+                'adoption_date' => 'nullable|date',
+                'password' => 'sometimes|string|min:8',
+            ]);
+
+            if (isset($validatedData['password'])) {
+                $validatedData['password'] = Hash::make($validatedData['password']);
+            }
+
+            $user->update($validatedData);
+            
+            return response()->json(['user_id' => $user->user_id] + $user->toArray(), 200);
+        } catch (\Exception $e) {
+            Log::error('Error updating user: ' . $e->getMessage());
+            return response()->json(['message' => 'Error al actualizar el usuario', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function destroy($user_id)
+    {
+        $user = User::where('user_id', $user_id)->first();
+    
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+    
         $user->delete();
-        return response()->json(null, 204);
+        return response()->json(['message' => 'Usuario eliminado correctamente'], 204);
     }
 }

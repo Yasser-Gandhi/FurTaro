@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 
 class PetController extends Controller
 {
+    // Obtener todos los registros de mascotas
     public function index()
     {
-        return Pet::all();
+        return response()->json(Pet::all(), 200);
     }
 
+    // Almacenar una nueva mascota
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -27,28 +29,49 @@ class PetController extends Controller
         return response()->json($pet, 201);
     }
 
-    public function show(Pet $pet)
+    // Obtener una mascota específica
+    public function show($id)
     {
-        return $pet;
+        $pet = Pet::find($id);
+    
+        if (!$pet) {
+            return response()->json(['message' => 'Mascota no encontrada'], 404);
+        }
+    
+        return response()->json($pet, 200);
     }
 
-    public function update(Request $request, Pet $pet)
+    // Actualizar una mascota existente
+    public function update(Request $request, $id)
     {
+        $pet = Pet::find($id);
+
+        if (!$pet) {
+            return response()->json(['message' => 'Mascota no encontrada'], 404);
+        }
+
         $validatedData = $request->validate([
-            'name' => 'string|max:255',
-            'species' => 'string|max:50',
-            'age' => 'integer',
-            'description' => 'string',
-            'shelter_id' => 'exists:shelters,shelter_id',
-            'adoption_date' => 'nullable|date',
+            'name' => 'sometimes|string|max:255',
+            'species' => 'sometimes|string|max:50',
+            'age' => 'sometimes|integer',
+            'description' => 'sometimes|string',
+            'shelter_id' => 'sometimes|exists:shelters,shelter_id',
+            'adoption_date' => 'sometimes|nullable|date',
         ]);
 
         $pet->update($validatedData);
         return response()->json($pet, 200);
     }
 
-    public function destroy(Pet $pet)
+    // Eliminar una mascota
+    public function destroy($id)
     {
+        $pet = Pet::find($id);
+
+        if (!$pet) {
+            return response()->json(['message' => 'Mascota no encontrada'], 404);
+        }
+
         $pet->delete();
         return response()->json(null, 204);
     }

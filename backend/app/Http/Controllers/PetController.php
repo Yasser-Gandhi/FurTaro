@@ -30,21 +30,21 @@ class PetController extends Controller
     }
 
     // Obtener una mascota específica
-    public function show($id)
+    public function show($pet_id)
     {
-        $pet = Pet::find($id);
-    
+        $pet = Pet::find($pet_id);
+
         if (!$pet) {
             return response()->json(['message' => 'Mascota no encontrada'], 404);
         }
-    
+
         return response()->json($pet, 200);
     }
 
     // Actualizar una mascota existente
-    public function update(Request $request, $id)
+    public function update(Request $request, $pet_id)
     {
-        $pet = Pet::find($id);
+        $pet = Pet::find($pet_id);
 
         if (!$pet) {
             return response()->json(['message' => 'Mascota no encontrada'], 404);
@@ -64,15 +64,23 @@ class PetController extends Controller
     }
 
     // Eliminar una mascota
-    public function destroy($id)
+    public function destroy($pet_id)
     {
-        $pet = Pet::find($id);
-
+        $pet = Pet::find($pet_id);
+    
         if (!$pet) {
             return response()->json(['message' => 'Mascota no encontrada'], 404);
         }
-
-        $pet->delete();
-        return response()->json(null, 204);
+    
+        // Eliminar registros relacionados en favorites
+        \DB::table('favorites')->where('pet_id', $pet_id)->delete();
+    
+        try {
+            $pet->delete();
+            return response()->json(['message' => 'Mascota eliminada correctamente'], 204);
+        } catch (\Exception $e) {
+            \Log::error('Error al eliminar la mascota: ' . $e->getMessage());
+            return response()->json(['message' => 'Error al eliminar la mascota'], 500);
+        }
     }
-}
+}    

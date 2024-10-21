@@ -10,7 +10,7 @@ class ShelterController extends Controller
     // Método para obtener todos los refugios
     public function index()
     {
-        return Shelter::all();
+        return response()->json(Shelter::all(), 200);
     }
 
     // Método para crear un nuevo refugio
@@ -37,10 +37,10 @@ class ShelterController extends Controller
     public function update(Request $request, Shelter $shelter)
     {
         $validatedData = $request->validate([
-            'name' => 'string|max:255',
-            'email' => 'string|email',
-            'location' => 'string|max:255',
-            'phone_number' => 'string|max:50',
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|email',
+            'location' => 'sometimes|string|max:255',
+            'phone_number' => 'sometimes|string|max:50',
         ]);
 
         // Actualizar los datos del refugio
@@ -51,7 +51,11 @@ class ShelterController extends Controller
     // Método para eliminar un refugio
     public function destroy(Shelter $shelter)
     {
-        $shelter->delete();
-        return response()->json(null, 204);
+        try {
+            $shelter->delete();
+            return response()->json(['message' => 'Refugio eliminado correctamente'], 204);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al eliminar el refugio'], 500);
+        }
     }
 }

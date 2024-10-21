@@ -18,6 +18,7 @@ class PetFactory extends Factory
             'age' => $this->faker->numberBetween(1, 25),
             'description' => $this->faker->sentence(),
             'shelter_id' => Shelter::factory(),
+            'status' => $this->faker->randomElement(['available', 'adopted']),
         ];
     }
 }

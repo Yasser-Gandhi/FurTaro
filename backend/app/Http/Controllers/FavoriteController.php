@@ -19,8 +19,20 @@ class FavoriteController extends Controller
             'pet_id' => 'required|exists:pets,pet_id',
         ]);
 
-        $favorite = Favorite::create($validatedData);
-        return response()->json($favorite, 201);
+        // Verificar si ya existe el favorito
+        $favorite = Favorite::where('user_id', $validatedData['user_id'])
+            ->where('pet_id', $validatedData['pet_id'])
+            ->first();
+
+        if ($favorite) {
+            // Si ya existe, eliminarlo (quitar el favorito)
+            $favorite->delete();
+            return response()->json(['message' => 'Favorito eliminado'], 204);
+        } else {
+            // Si no existe, crear el favorito (añadir a favoritos)
+            $favorite = Favorite::create($validatedData);
+            return response()->json($favorite, 201);
+        }
     }
 
     public function show(Favorite $favorite)
@@ -39,9 +51,20 @@ class FavoriteController extends Controller
         return response()->json($favorite, 200);
     }
 
-    public function destroy(Favorite $favorite)
+    public function destroy($favorite_id)
     {
-        $favorite->delete();
-        return response()->json(null, 204);
+        $favorite = Favorite::find($favorite_id);
+
+        if (!$favorite) {
+            return response()->json(['message' => 'Favorito no encontrado'], 404);
+        }
+
+        try {
+            $favorite->delete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            \Log::error('Error al eliminar el favorito: ' . $e->getMessage());
+            return response()->json(['message' => 'Error al eliminar el favorito'], 500);
+        }
     }
 }

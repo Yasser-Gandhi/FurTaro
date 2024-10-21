@@ -20,7 +20,6 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'phone_number' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'adoption_date' => 'nullable|date',
             'password' => 'required|string|min:8',
         ]);
 
@@ -55,7 +54,6 @@ class UserController extends Controller
                 'name' => 'sometimes|string|max:255',
                 'phone_number' => 'sometimes|string',
                 'email' => 'sometimes|string|email|unique:users,email,' . $user->user_id . ',user_id', // Cambiado aquí
-                'adoption_date' => 'nullable|date',
                 'password' => 'sometimes|string|min:8',
             ]);
 

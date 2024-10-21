@@ -6,23 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('adoptions', function (Blueprint $table) {
-            $table->id('adoption_id'); // Clave primaria de la tabla 'adoptions'
-            $table->foreignId('user_id')->constrained('users', 'user_id'); // Ajusta la clave foránea a 'user_id'
-            $table->foreignId('pet_id')->constrained('pets', 'pet_id'); // Ajusta la clave foránea a 'pet_id'
+            $table->id('adoption_id');
+            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
+            $table->foreignId('pet_id')->constrained('pets', 'pet_id')->onDelete('cascade');
+            $table->enum('status', ['active', 'returned', 'completed'])->default('active');
             $table->timestamp('adoption_date');
-            $table->timestamps(); // created_at and updated_at
+            $table->timestamp('end_date')->nullable();
+            $table->text('end_reason')->nullable();
+            $table->timestamps();
+
+            // Asegura que un animal solo pueda tener una adopción activa a la vez
+            $table->unique(['pet_id', 'status'], 'unique_active_adoption')->where('status', 'active');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('adoptions');

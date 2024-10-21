@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('species', 50);
             $table->integer('age');
             $table->longText('description');
-            $table->foreignId('shelter_id')->constrained('shelters', 'shelter_id'); // Clave foránea de la tabla 'shelters'
-            $table->timestamp('adoption_date')->nullable();
+            $table->foreignId('shelter_id')->constrained('shelters', 'shelter_id');
+            $table->enum('status', ['available', 'adopted'])->default('available');
             $table->timestamps(); // created_at and updated_at
         });
     }

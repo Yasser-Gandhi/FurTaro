@@ -14,11 +14,11 @@ class PetFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(['Bella', 'Max', 'Charlie', 'Luna', 'Oliver', 'Lucy', 'Daisy', 'Buddy', 'Taro']),
-            'species' => $this->faker->randomElement(['dog', 'cat', 'rabbit', 'hamster']),
+            'species' => $this->faker->randomElement(['perro', 'gato', 'conejo', 'hamster']),
             'age' => $this->faker->numberBetween(1, 25),
             'description' => $this->faker->sentence(),
             'shelter_id' => Shelter::factory(),
-            'status' => $this->faker->randomElement(['available', 'adopted']),
+            'status' => $this->faker->randomElement(['disponible', 'adoptado']),
         ];
     }
 }

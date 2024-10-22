@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('age');
             $table->longText('description');
             $table->foreignId('shelter_id')->constrained('shelters', 'shelter_id');
-            $table->enum('status', ['available', 'adopted'])->default('available');
+            $table->enum('status', ['disponible', 'adoptado'])->default('disponible');
             $table->timestamps(); // created_at and updated_at
         });
     }

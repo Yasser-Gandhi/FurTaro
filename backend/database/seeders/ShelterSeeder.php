@@ -13,6 +13,6 @@ class ShelterSeeder extends Seeder
         Shelter::createDefaultShelter();
 
         // Puedes agregar más refugios si es necesario
-        Shelter::factory()->count(5)->create(); // Si estás usando factories
+        Shelter::factory()->count(9)->create(); // Si estás usando factories
     }
 }

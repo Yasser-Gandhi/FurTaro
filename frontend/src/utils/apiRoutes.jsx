@@ -12,7 +12,7 @@ const fetchData = async (url) => {
 };
 
 export const fetchPets = () => fetchData(`${API_BASE_URL}/pets`);
-export const fetchPet = (id) => fetchData(`${API_BASE_URL}/pets/${id}`);
+export const fetchPetById = (id) => fetchData(`${API_BASE_URL}/pets/${id}`);
 export const fetchShelters = () => fetchData(`${API_BASE_URL}/shelters`);
 export const fetchShelter = (id) => fetchData(`${API_BASE_URL}/shelters/${id}`);
 export const fetchUsers = () => fetchData(`${API_BASE_URL}/users`);
@@ -21,3 +21,14 @@ export const fetchFavorites = () => fetchData(`${API_BASE_URL}/favorites`);
 export const fetchFavorite = (id) => fetchData(`${API_BASE_URL}/favorites/${id}`);
 export const fetchAdoptions = () => fetchData(`${API_BASE_URL}/adoptions`);
 export const fetchAdoption = (id) => fetchData(`${API_BASE_URL}/adoptions/${id}`);
+
+
+
+
+//Pics Generator
+
+export const getPetImage = () => {
+    const width = 800;
+    const height = 700;
+    return `https://place.dog/${width}/${height}`;
+};

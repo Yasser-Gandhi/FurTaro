@@ -1,16 +1,20 @@
 // src/App.jsx
-
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PetList from './components/PetList';
-import ShelterList from './components/ShelterList';
+import PetDetails from './components/PetDetails';
+import './App.css';
 
 const App = () => {
     return (
-        <div>
-            <h1>Aplicación de Mascotas</h1>
-            <PetList />
-            <ShelterList />
-        </div>
+        <Router>
+            <div className="app">
+                <Routes>
+                    <Route path="/" element={<PetList />} />
+                    <Route path="/pet/:id" element={<PetDetails />} />
+                </Routes>
+            </div>
+        </Router>
     );
 };
 

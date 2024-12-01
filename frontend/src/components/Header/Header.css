@@ -1,0 +1,36 @@
+/* src/components/Header/Header.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #EAA0F8;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+}
+
+.brand-name {
+  margin-left: 10px; /* Espacio entre el logo y el nombre */
+  font-size: 1.5rem; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-weight: bold; /* O cualquier estilo que desees */
+}
+
+.signup-button {
+  background-color: #92CE53;
+  color: #3D3D47;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.signup-button:hover {
+  background-color: #F50087;
+  color: #FFFCF9;
+}

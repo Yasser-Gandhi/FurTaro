@@ -1,0 +1,63 @@
+/* src/pages/ShelterList/ShelterList.css */
+.shelter-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  /* src/pages/ShelterDetails/ShelterDetails.css */
+  .shelter-details {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .back-button {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .shelter-info {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+  }
+  
+  /* src/pages/MyFavorites/MyFavorites.css */
+  .favorites-list {
+    padding: 2rem;
+  }
+  
+  .favorites-list h2 {
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  /* src/pages/Adoptions/Adoptions.css */
+  .adoptions-list {
+    padding: 2rem;
+  }
+  
+  .adoptions-list h2 {
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  .adoption-card {
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .adoption-status {
+    padding: 1rem;
+    background-color: #f8f8f8;
+  }
+  

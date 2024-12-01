@@ -1,0 +1,21 @@
+/* src/components/Footer/Footer.css */
+.footer {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3D3D47;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px;
+    background-color: #EAA0F8;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footer-icon {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 8px;
+  }
+  

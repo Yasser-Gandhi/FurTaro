@@ -1,0 +1,20 @@
+/* src/components/ItemCard/ItemCard.css */
+.item-card {
+    max-width: 600px;
+    background-color: #FFFCF9;
+    color: #3D3D47;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .item-card:hover {
+    background-color: #92CE53;
+  }
+  
+  .item-image {
+    width: 100%;
+    border-radius: 10px;
+  }
+  

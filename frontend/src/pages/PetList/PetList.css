@@ -1,0 +1,8 @@
+/* src/pages/PetList/PetList.css */
+.pet-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 80px; /* Espacio para el footer fijo */
+  }
+  
